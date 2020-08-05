@@ -1,6 +1,7 @@
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
+const mongojs = require("mongojs");
 
 const PORT = process.env.PORT || 3000;
 
@@ -39,14 +40,33 @@ app.post("/api/workouts", ({ body }, res) => {
 });
 
 //UPDATE A WORKOUT
-app.put("/api/workouts", ({ body }, res) => {
-    Workout.update(body)
-        .then(dbWorkout => {
-            res.json(dbWorkout);
-        })
-        .catch(err => {
-            res.json(err);
-        });
+app.put("/api/workouts/:id", ({ body }, res) => {
+    Workout.update(
+        {
+            _id: mongojs.ObjectId(req.params.id)
+        },
+        {
+            $set: {
+                date: body.date,
+                exercise: {
+                    type: body.type,
+                    name: body.name,
+                    duration: body.duration,
+                    weight: body.weight,
+                    reps: body.reps,
+                    sets: body.sets,
+                    distance: body.distance
+                }
+            }
+        },
+        (error, data) => {
+            if (error) {
+                res.send(error);
+            } else {
+                res.send(data);
+            }
+        }
+    )
 })
 
 
