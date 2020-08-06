@@ -5,15 +5,15 @@ const Schema = mongoose.Schema;
 const WorkoutSchema = new Schema({
     date: {
         type: Date,
-        default: Data.now
+        default: Date.now
     },
-    exercise: {
+    exercise: [{
         type: {
             type: String
         },
         name: {
-            type:String
-        }, 
+            type: String
+        },
         duration: {
             type: Number
         },
@@ -25,12 +25,22 @@ const WorkoutSchema = new Schema({
         },
         sets: {
             type: Number
-        }, 
+        },
         distance: {
             type: Number
         }
-    }
+    }]
 });
+
+//add that function 
+
+WorkoutSchema.methods.totalDuration = function() {
+    let total = 0;
+    this.exercise.map(exercise => {
+        total = total + exercise.duration;
+    });
+    this.totalDuration = total;
+}
 
 const Workout = mongoose.model("Workout", WorkoutSchema);
 module.exports = Workout;

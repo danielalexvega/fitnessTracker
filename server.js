@@ -1,7 +1,7 @@
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
-const mongojs = require("mongojs");
+const path = require("path");
 
 const PORT = process.env.PORT || 3000;
 
@@ -30,7 +30,10 @@ app.get("/api/workouts", (req, res) => {
 
 //CREATE A WORKOUT
 app.post("/api/workouts", ({ body }, res) => {
-    Workout.create(body)
+    const workout = new Workout(body);
+    workout.totalDuration();
+
+    Workout.create(workout)
         .then(dbWorkout => {
             res.json(dbWorkout);
         })
@@ -39,35 +42,49 @@ app.post("/api/workouts", ({ body }, res) => {
         });
 });
 
-//UPDATE A WORKOUT
-app.put("/api/workouts/:id", ({ body }, res) => {
-    Workout.update(
-        {
-            _id: mongojs.ObjectId(req.params.id)
-        },
-        {
-            $set: {
-                date: body.date,
-                exercise: {
-                    type: body.type,
-                    name: body.name,
-                    duration: body.duration,
-                    weight: body.weight,
-                    reps: body.reps,
-                    sets: body.sets,
-                    distance: body.distance
-                }
-            }
-        },
-        (error, data) => {
-            if (error) {
-                res.send(error);
-            } else {
-                res.send(data);
+//ADD A WORKOUT
+app.put("/api/workouts/:id", (req, res) => {
+    console.log(req.body);
+    Workout.findByIdAndUpdate(
+        req.params.id, {
+        $push: {
+            exercise: {
+                type: req.body.type,
+                name: req.body.name,
+                weight: req.body.weight,
+                sets: req.body.sets,
+                reps: req.body.reps,
+                duration: req.body.duration,
+                distance: req.body.distance
             }
         }
-    )
-})
+    }, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.json(result);
+        }
+    });
+});
+
+// Father Limit aka Poppa Limit
+app.get("/api/workouts/range", (req, res) => {
+    Workout.find({})
+        .then(dbWorkout => {
+            res.json(dbWorkout);
+        })
+        .catch(err => {
+            res.json(err);
+        })
+});
+
+app.get("/exercise", (req, res) => {
+    res.sendFile(path.join(__dirname, "./public/exercise.html"));
+});
+
+app.get("/stats", (req, res) => {
+    res.sendFile(path.join(__dirname, "./public/stats.html"));
+});
 
 
 
