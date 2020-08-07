@@ -166,7 +166,7 @@ function populateChart(data) {
     options: {
       title: {
         display: true,
-        text: "Excercises Performed"
+        text: "Excercises Performed broken up by Duration (in minutes)"
       }
     }
   });
@@ -186,7 +186,7 @@ function populateChart(data) {
     options: {
       title: {
         display: true,
-        text: "Excercises Performed"
+        text: "Excercises Performed broken up by weight"
       }
     }
   });
@@ -206,7 +206,7 @@ function duration(data) {
 
   data.forEach(workout => {
     let day = new Date(workout.date);
-    let dayIndex = day.getDay();
+    let dayIndex = day.getDay();  
     workout.exercise.forEach(exercise => {
       let newDuration = durations[dayIndex] + exercise.duration;
       durations.splice(dayIndex, 1, newDuration);
