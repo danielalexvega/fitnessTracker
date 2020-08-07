@@ -31,6 +31,11 @@ a:active,
 a:visited {
   text-decoration: none;
   color: inherit;
+  padding: 0 10px;
+}
+
+a:not(:last-child) {
+  border-right: 1px solid #ddd;
 }
 
 header {

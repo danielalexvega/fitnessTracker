@@ -67,7 +67,7 @@ app.put("/api/workouts/:id", (req, res) => {
     });
 });
 
-// Father Limit aka Poppa Limit
+// Some limit
 app.get("/api/workouts/range", (req, res) => {
     Workout.find({})
         .then(dbWorkout => {
