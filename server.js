@@ -31,7 +31,6 @@ app.get("/api/workouts", (req, res) => {
 //CREATE A WORKOUT
 app.post("/api/workouts", ({ body }, res) => {
     const workout = new Workout(body);
-    workout.totalDuration();
 
     Workout.create(workout)
         .then(dbWorkout => {
