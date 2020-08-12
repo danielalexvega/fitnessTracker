@@ -1,43 +1,31 @@
 # fitnessTracker
-An app that tracks your daily workouts. You can log multiple exercises in a workout on a given day, and track the name, type, weight, sets, reps, and duration of the exercise. 
+This app tracks your daily workouts. You can log multiple exercises in a workout on a given day, and track the name, type, weight, sets, reps, and duration of the exercise. 
 
-## Acceptance Criteria
+## Using the app
 
-When the user loads the page, they should be given the option to create a new workout, or continue with their last workout.
+When a user opens the app, the most recent workout is displayed. The user can then continue that work out or create a new one. 
 
-The user should be able to:
+### Continuing a workout
 
-  * Add exercises to a previous workout plan.
+When the user continues a workout, they can add more exercises to their workout. A real world example would be if you go to a gym, you might do multiple workouts to target different muscle groups. (Bench press, pull-downs, squats, etc.)
 
-  * Add new exercises to a new workout plan.
+### Create a new workout
 
-  * View multiple the combined weight of multiple exercises on the `stats` page.
+When the user creates a new workout, they select an exercise type, either resistance or cardio. 
 
-## Commit Early and Often
+### Technology
 
-One of the most important skills to master as a web developer is version control. Building the habit of committing via Git is important for two reasons:
+This app uses the following technologies:
+- [Node.js](https://nodejs.org/en/)
+- [MongoDb](https://www.mongodb.com/)
+- [Mongoose](https://mongoosejs.com/docs/guide.html)
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- HTML
+- CSS
+- [Express](https://expressjs.com/)
 
-1. Your commit history is a signal to employers that you are actively working on projects and learning new skills
+## Deployment
 
-2. Your commit history allows you to revert your code base in the event that you need to return to a previous state
+You can see the deployed app [here.](https://github.com/danielalexvega/fitnessTracker) 
 
-Follow these guidelines for committing:
-
-* Make single purpose commits for related changes to ensure a clean, manageable history. If you are fixing two issues, make two commits
-
-* Write descriptive, meaningful commit messages so that you and anyone else looking at your repository can easily understand its history
-
-* Don't commit half done work, for the sake of your collaborators (and your future self!)
-
-* Test your application before you commit to ensure functionality at every step in the development process
-
-We would like you to have well over 200 commits by graduation, so commit early and often!
-
-## Submission on BCS
-
-You are required to submit the following:
-
-* The URL to the deployed application
-
-* The URL to the Github repository
 
