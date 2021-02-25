@@ -14,7 +14,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workoutdb", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workoutdb",
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false
+    });
 
 
 // GET ALL THE WORKOUTS
@@ -43,7 +49,7 @@ app.post("/api/workouts", ({ body }, res) => {
 
 //ADD A WORKOUT
 app.put("/api/workouts/:id", (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     Workout.findByIdAndUpdate(
         req.params.id, {
         $push: {
@@ -84,8 +90,6 @@ app.get("/exercise", (req, res) => {
 app.get("/stats", (req, res) => {
     res.sendFile(path.join(__dirname, "./public/stats.html"));
 });
-
-
 
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}`);
