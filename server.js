@@ -23,6 +23,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workoutdb",
     });
 
 
+//gn3ALwG53uA7MMy
+
 // GET ALL THE WORKOUTS
 app.get("/api/workouts", (req, res) => {
     Workout.find({})
@@ -49,7 +51,6 @@ app.post("/api/workouts", ({ body }, res) => {
 
 //ADD A WORKOUT
 app.put("/api/workouts/:id", (req, res) => {
-    // console.log(req.body);
     Workout.findByIdAndUpdate(
         req.params.id, {
         $push: {
